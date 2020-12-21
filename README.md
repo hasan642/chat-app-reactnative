@@ -21,6 +21,7 @@ Chatsy is currently extended with the following plugins.
 | Plugin | Read more |
 | ------ | ------ |
 | React NativeNavigation/Wix | [https://github.com/wix/react-native-navigation]
+| React native paper | [https://callstack.github.io/react-native-paper/]
 ### generate-react-cli (https://github.com/arminbro/generate-react-cli#custom-component-types)
 it a template engine for Javascript.
 create component: ```npx generate-react-cli component ComponentName```
