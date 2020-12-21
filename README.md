@@ -25,4 +25,4 @@ Chatsy is currently extended with the following plugins.
 ### generate-react-cli (https://github.com/arminbro/generate-react-cli#custom-component-types)
 it a template engine for Javascript.
 create component: ```npx generate-react-cli component ComponentName```
-create screen: ```npx generate-react-cli component ScreenName --type=page```
+create screen: ```npx generate-react-cli component ScreenName --type=screen```

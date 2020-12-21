@@ -7,7 +7,8 @@
 
 import { Navigation } from "react-native-navigation";
 import {
-    LoginScreen
+    LoginScreen,
+    SignupScreen
 } from 'screens';
 
 /**
@@ -19,7 +20,8 @@ const prefix = 'com.medium';
  * screen names.
  */
 export const SCREENS = Object.freeze({
-    LOGIN_SCRREN: `${prefix}.loginScreen`
+    LOGIN_SCRREN: `${prefix}.loginScreen`,
+    SIGNUP_SCRREN: `${prefix}.signupScreen`
 });
 
 /**
@@ -29,6 +31,11 @@ export function registerScreens() {
     Navigation.registerComponent(
         SCREENS.LOGIN_SCRREN,
         () => LoginScreen
+    );
+
+    Navigation.registerComponent(
+        SCREENS.SIGNUP_SCRREN,
+        () => SignupScreen
     );
 };
 
