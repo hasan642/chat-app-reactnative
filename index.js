@@ -1,9 +1,26 @@
 /**
- * @format
+ * the root file.
  */
 
-import {AppRegistry} from 'react-native';
-import App from './App';
-import {name as appName} from './app.json';
+import { Navigation } from "react-native-navigation";
+import {
+    registerScreens,
+    goToApp
+} from "navigation";
 
-AppRegistry.registerComponent(appName, () => App);
+/**
+ * Register navigation screens.
+ */
+registerScreens();
+
+/**
+ * "registerAppLaunchedListener" event.
+ */
+Navigation.events().registerAppLaunchedListener(() => {
+
+    /**
+     * set the root app.
+     */
+    goToApp();
+
+});

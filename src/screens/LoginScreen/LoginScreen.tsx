@@ -1,7 +1,7 @@
 /**
- * TemplateName.tsx
+ * LoginScreen.tsx
  * developed by Hasan Alawneh.
- * A file that shows a TemplateName component.
+ * A file that shows a LoginScreen component.
  * created at: 21/12/2020
  */
 
@@ -12,14 +12,14 @@ import styles from './styles';
 /**
  * type checking
  */
-interface TemplateNameProps {
+interface LoginScreenProps {
 
 };
 
 /**
- * A function component that shows a TemplateName.
+ * A function component that shows a LoginScreen.
  */
-function TemplateName(props: TemplateNameProps) {
+function LoginScreen(props: LoginScreenProps) {
     return (<View style={styles.container}>
 
     </View>);
@@ -28,4 +28,4 @@ function TemplateName(props: TemplateNameProps) {
 /**
  * export as default.
  */
-export default TemplateName;
+export default LoginScreen;
