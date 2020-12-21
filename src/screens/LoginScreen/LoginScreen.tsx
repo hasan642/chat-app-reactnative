@@ -8,6 +8,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import styles from './styles';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 /**
  * type checking
@@ -21,7 +22,7 @@ interface LoginScreenProps {
  */
 function LoginScreen(props: LoginScreenProps) {
     return (<View style={styles.container}>
-
+<Icon name="rocket" size={30} color="#900" />
     </View>);
 };
 
