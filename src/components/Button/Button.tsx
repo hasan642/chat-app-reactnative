@@ -25,9 +25,10 @@ function Button({
     title
 }: ButtonProps) {
     return (<RNPaperBtn
-    
-        {...{} as any}
 
+        {...{} as any}
+        
+        style={styles.btn}
         mode={mode}
     >
         {title}

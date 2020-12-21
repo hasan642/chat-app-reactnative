@@ -11,9 +11,9 @@ import { StyleSheet } from 'react-native';
  * A styles for Button.
  */
 const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
+  btn: {
+    width: '100%'
+  }
 });
 
 /**
