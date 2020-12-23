@@ -6,7 +6,10 @@
  */
 
 import { StyleSheet } from 'react-native';
-import { RADIUS } from 'theme';
+import {
+  RADIUS,
+  COLOR
+} from 'theme';
 
 /**
  * A styles for Input.
@@ -25,6 +28,9 @@ const styles = StyleSheet.create({
  * the theme of input.
  */
 export const theme = {
+  colors: {
+    primary: COLOR.royalBlue
+  },
   roundness: RADIUS.SMALL
 };
 

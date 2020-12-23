@@ -32,14 +32,16 @@ const styles = StyleSheet.create({
     fontSize: scaleFont(16),
   },
   navButtonText: {
-    fontSize: scaleFont(15)
+    fontSize: scaleFont(15),
+    color: COLOR.royalBlue
   },
   passwordInput: {
     marginTop: MARGINS.NORMAL
   },
   loginBtnStyle: {
-    marginTop: MARGINS.NORMAL
-  }
+    marginTop: MARGINS.NORMAL,
+    backgroundColor: COLOR.royalBlue
+  },
 });
 
 /**

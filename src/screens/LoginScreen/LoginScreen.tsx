@@ -98,7 +98,7 @@ function LoginScreen({ componentId }: LoginScreenProps) {
             'SIGNUP_SCRREN'
         );
     };
-    
+
     return (<View style={styles.container}>
         <Title style={styles.titleText}>
             {'Welcome to Chat app'}

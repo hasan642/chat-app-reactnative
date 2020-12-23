@@ -8,6 +8,9 @@ target 'chatApp' do
 
   use_react_native!(:path => config["reactNativePath"])
 
+  # pods for app.
+  pod 'Firebase/Analytics'
+
   target 'chatAppTests' do
     inherit! :complete
     # Pods for testing
