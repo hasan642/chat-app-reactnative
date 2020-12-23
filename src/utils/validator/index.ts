@@ -27,3 +27,11 @@ export const loginFormValidator = () => yup.object().shape({
     email: requiredField('email is required'),
     password: passwordField('password required', 4, 'should be 4 at least')
 });
+
+/**
+ * A signup screen validator.
+ */
+export const signupFormValidator = () => yup.object().shape({
+    email: requiredField('email is required'),
+    password: passwordField('password required', 4, 'should be 4 at least')
+});

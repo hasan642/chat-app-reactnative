@@ -10,6 +10,7 @@ const Sizes = Object.freeze({
     SMALL: 4,
     NORMAL: 8,
     LARGE: 16,
+    VERY_LARGE: 24,
     HUGE: 32
 });
 
@@ -20,12 +21,14 @@ export const MARGINS = Object.freeze({
     SMALL: Sizes.SMALL,
     NORMAL: Sizes.NORMAL,
     LARGE: Sizes.LARGE,
+    VERY_LARGE: Sizes.VERY_LARGE,
     HUGE: Sizes.HUGE
 });
 export const PADDINGS = Object.freeze({
     SMALL: Sizes.SMALL,
     NORMAL: Sizes.NORMAL,
     LARGE: Sizes.LARGE,
+    VERY_LARGE: Sizes.VERY_LARGE,
     HUGE: Sizes.HUGE
 });
 export const RADIUS = Object.freeze({

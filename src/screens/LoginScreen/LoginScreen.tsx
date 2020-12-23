@@ -20,6 +20,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginFormValidator } from 'utils';
 import { NavigationComponentProps } from 'react-native-navigation';
+import { pushToStack } from 'navigation';
 
 /**
  * type checking.
@@ -75,7 +76,7 @@ function LoginScreen({ componentId }: LoginScreenProps) {
     );
 
     /**
-     * Focus password input.
+     * Focuses on password input.
      */
     const focusOnPasswordInput = () => {
         passwordInput.current.focus()
@@ -88,6 +89,16 @@ function LoginScreen({ componentId }: LoginScreenProps) {
         console.log({ payload });
     };
 
+    /**
+     * Navigates to signup screen.
+     */
+    const navigateToSignup = () => {
+        pushToStack(
+            componentId,
+            'SIGNUP_SCRREN'
+        );
+    };
+    
     return (<View style={styles.container}>
         <Title style={styles.titleText}>
             {'Welcome to Chat app'}
@@ -114,6 +125,7 @@ function LoginScreen({ componentId }: LoginScreenProps) {
             onPress={handleSubmit(onSubmit)}
         />
         <Button
+            onPress={navigateToSignup}
             title='New user? Join here'
             mode='text'
             uppercase={false}

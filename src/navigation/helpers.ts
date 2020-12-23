@@ -8,7 +8,7 @@
 
 import { Navigation } from "react-native-navigation";
 import { ROOT } from "./contants";
-import { SCREENS } from "./screens";
+import { SCREENS, Screens } from "./screens";
 
 /**
  * A function helper that goes to app.
@@ -38,4 +38,31 @@ export function setDefaultOptions() {
             visible: false
         },
     })
+};
+
+/**
+ * Pushes new screen to stack.
+ */
+export function pushToStack(
+    currentComponentId: string,
+    screenName: Screens,
+    propsToPassed: Object = {}
+) {
+    Navigation.push(
+        currentComponentId,
+        {
+            component: {
+                name: SCREENS[screenName],
+                id: SCREENS[screenName],
+                passProps: propsToPassed
+            }
+        }
+    )
+};
+
+/**
+ * Go back to previous screen.
+ */
+export function goBack(currentComponentId: string) {
+    Navigation.pop(currentComponentId);
 };

@@ -8,7 +8,9 @@
 import { StyleSheet } from 'react-native';
 import {
   COLOR,
-  MARGINS
+  MARGINS,
+  scaleFont,
+  PADDINGS
 } from 'theme';
 
 /**
@@ -20,17 +22,17 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 24
+    paddingHorizontal: PADDINGS.VERY_LARGE
   },
   titleText: {
-    fontSize: 24,
-    marginBottom: 10
+    fontSize: scaleFont(20),
+    marginBottom: MARGINS.NORMAL
   },
   loginButtonLabel: {
-    fontSize: 22,
+    fontSize: scaleFont(16),
   },
   navButtonText: {
-    fontSize: 16
+    fontSize: scaleFont(15)
   },
   passwordInput: {
     marginTop: MARGINS.NORMAL
