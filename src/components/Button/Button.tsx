@@ -6,7 +6,10 @@
  */
 
 import React from 'react';
-import { View, TextStyle, ViewStyle } from 'react-native';
+import {
+    TextStyle,
+    ViewStyle
+} from 'react-native';
 import styles from './styles';
 import { Button as RNPaperBtn } from 'react-native-paper';
 /**

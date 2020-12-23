@@ -6,6 +6,7 @@
  */
 
 import { StyleSheet } from 'react-native';
+import { RADIUS } from 'theme';
 
 /**
  * A styles for Input.
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
  * the theme of input.
  */
 export const theme = {
-  roundness: 4
+  roundness: RADIUS.SMALL
 };
 
 /**
