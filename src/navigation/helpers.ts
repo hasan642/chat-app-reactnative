@@ -28,3 +28,14 @@ export async function goToApp() {
         }
     });
 };
+
+/**
+ * A function helper that set default options for navigation.
+ */
+export function setDefaultOptions() {
+    Navigation.setDefaultOptions({
+        topBar: {
+            visible: false
+        },
+    })
+};

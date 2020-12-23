@@ -14,7 +14,18 @@ const styles = StyleSheet.create({
   input: {
     width: '100%'
   },
+  errorMessage: {
+    textAlign: 'left',
+    alignSelf: 'flex-start'
+  }
 });
+
+/**
+ * the theme of input.
+ */
+export const theme = {
+  roundness: 4
+};
 
 /**
  * export as default.

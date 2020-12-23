@@ -10,11 +10,14 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "@hookform/resolvers": "^1.2.0",
     "react": "16.13.1",
+    "react-hook-form": "^6.13.1",
     "react-native": "0.63.3",
     "react-native-navigation": "^7.6.0",
     "react-native-paper": "^4.5.0",
-    "react-native-vector-icons": "^7.1.0"
+    "react-native-vector-icons": "^7.1.0",
+    "yup": "^0.32.8"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
