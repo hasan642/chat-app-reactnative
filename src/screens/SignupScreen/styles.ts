@@ -35,7 +35,8 @@ const styles = StyleSheet.create({
     fontSize: scaleFont(16),
   },
   loginBtnStyle: {
-    marginTop: MARGINS.NORMAL
+    marginTop: MARGINS.NORMAL,
+    backgroundColor: COLOR.royalBlue
   },
   backIcon: {
     marginTop: MARGINS.NORMAL
