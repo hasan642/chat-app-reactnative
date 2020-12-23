@@ -8,7 +8,10 @@
 
 import { Navigation } from "react-native-navigation";
 import { ROOT } from "./contants";
-import { SCREENS, Screens } from "./screens";
+import {
+    SCREENS,
+    Screens
+} from "./screens";
 
 /**
  * A function helper that goes to app.
