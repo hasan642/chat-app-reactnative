@@ -6,6 +6,7 @@
  */
 
 import { StyleSheet } from 'react-native';
+import { RADIUS } from 'theme';
 
 /**
  * A styles for Input.
@@ -14,7 +15,18 @@ const styles = StyleSheet.create({
   input: {
     width: '100%'
   },
+  errorMessage: {
+    textAlign: 'left',
+    alignSelf: 'flex-start'
+  }
 });
+
+/**
+ * the theme of input.
+ */
+export const theme = {
+  roundness: RADIUS.SMALL
+};
 
 /**
  * export as default.

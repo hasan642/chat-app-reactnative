@@ -7,7 +7,8 @@
 
 export const COLOR = Object.freeze({
     light: '#FFF',
-    dark: '#000'
+    dark: '#000',
+    wildSand: "#F5F5F5",
 });
 
 /**

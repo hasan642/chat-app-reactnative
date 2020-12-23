@@ -5,7 +5,8 @@
 import { Navigation } from "react-native-navigation";
 import {
     registerScreens,
-    goToApp
+    goToApp,
+    setDefaultOptions
 } from "navigation";
 
 /**
@@ -17,6 +18,11 @@ registerScreens();
  * "registerAppLaunchedListener" event.
  */
 Navigation.events().registerAppLaunchedListener(() => {
+
+    /**
+     * set default navigation options.
+     */
+    setDefaultOptions();
 
     /**
      * set the root app.

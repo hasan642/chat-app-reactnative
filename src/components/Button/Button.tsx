@@ -6,15 +6,23 @@
  */
 
 import React from 'react';
-import { View } from 'react-native';
+import {
+    TextStyle,
+    ViewStyle
+} from 'react-native';
 import styles from './styles';
 import { Button as RNPaperBtn } from 'react-native-paper';
 /**
  * type checking
  */
 interface ButtonProps {
-    mode?: 'text' | 'outlined' | 'contained';
     title: string;
+
+    labelStyle?: TextStyle;
+    style?: ViewStyle;
+    mode?: 'text' | 'outlined' | 'contained';
+    uppercase?: boolean;
+    onPress?: () => void;
 };
 
 /**
@@ -22,14 +30,26 @@ interface ButtonProps {
  */
 function Button({
     mode = 'outlined',
-    title
+    title,
+    labelStyle,
+    style: overrideStyle,
+    uppercase = true,
+    onPress
 }: ButtonProps) {
     return (<RNPaperBtn
 
         {...{} as any}
-        
-        style={styles.btn}
+
+        style={
+            [
+                styles.btn,
+                overrideStyle
+            ]
+        }
         mode={mode}
+        labelStyle={labelStyle}
+        uppercase={uppercase}
+        onPress={onPress}
     >
         {title}
     </RNPaperBtn>);

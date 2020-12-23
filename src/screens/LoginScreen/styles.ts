@@ -6,16 +6,38 @@
  */
 
 import { StyleSheet } from 'react-native';
-import { COLOR } from 'theme';
+import {
+  COLOR,
+  MARGINS
+} from 'theme';
 
 /**
  * A styles for LoginScreen.
  */
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: COLOR.wildSand,
     flex: 1,
-    backgroundColor: COLOR.light
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 24
   },
+  titleText: {
+    fontSize: 24,
+    marginBottom: 10
+  },
+  loginButtonLabel: {
+    fontSize: 22,
+  },
+  navButtonText: {
+    fontSize: 16
+  },
+  passwordInput: {
+    marginTop: MARGINS.NORMAL
+  },
+  loginBtnStyle: {
+    marginTop: MARGINS.NORMAL
+  }
 });
 
 /**
