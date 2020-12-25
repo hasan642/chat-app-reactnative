@@ -32,6 +32,14 @@ const styles = StyleSheet.create({
   },
   btn: {
     marginTop: MARGINS.NORMAL
+  },
+  textArea: {
+    textAlign: 'left',
+    padding:PADDINGS.NORMAL
+  },
+  textareaContainer: {
+    backgroundColor: COLOR.mercury,
+    marginTop: MARGINS.NORMAL
   }
 });
 
