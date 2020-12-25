@@ -31,3 +31,12 @@ export const signupFormValidator = () => yup.object().shape({
         .required(translate('validation.fieldRequired'))
         .min(6, translate('validation.passwordLengthError', { length: 6 }))
 });
+
+/**
+ * An add room screen validator.
+ */
+export const addRoomValidator = () => yup.object().shape({
+    roomName: yup.string()
+        .required(translate('validation.fieldRequired'))
+        .min(2, translate('validation.roomNameLengthError')),
+});
