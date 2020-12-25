@@ -10,8 +10,9 @@ import {
     TextStyle,
     ViewStyle
 } from 'react-native';
-import styles from './styles';
+import styles, { theme } from './styles';
 import { Button as RNPaperBtn } from 'react-native-paper';
+
 /**
  * type checking
  */
@@ -50,6 +51,7 @@ function Button({
         labelStyle={labelStyle}
         uppercase={uppercase}
         onPress={onPress}
+        theme={theme}
     >
         {title}
     </RNPaperBtn>);

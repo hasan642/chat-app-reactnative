@@ -3,3 +3,4 @@
  */
 
 export * from './validator';
+export * from './firebaseAuth';

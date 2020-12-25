@@ -8,8 +8,10 @@
 import { Navigation } from "react-native-navigation";
 import {
     LoginScreen,
-    SignupScreen
+    SignupScreen,
+    HomeScreen
 } from 'screens';
+import { withRedux } from "./providers";
 
 /**
  * constants.
@@ -21,7 +23,8 @@ const prefix = 'com.medium';
  */
 export const SCREENS = Object.freeze({
     LOGIN_SCRREN: `${prefix}.loginScreen`,
-    SIGNUP_SCRREN: `${prefix}.signupScreen`
+    SIGNUP_SCRREN: `${prefix}.signupScreen`,
+    HOME_SCREEN: `${prefix}.homeScreen`,
 });
 
 /**
@@ -30,12 +33,20 @@ export const SCREENS = Object.freeze({
 export function registerScreens() {
     Navigation.registerComponent(
         SCREENS.LOGIN_SCRREN,
+        () => withRedux(LoginScreen),
         () => LoginScreen
     );
 
     Navigation.registerComponent(
         SCREENS.SIGNUP_SCRREN,
+        () => withRedux(SignupScreen),
         () => SignupScreen
+    );
+
+    Navigation.registerComponent(
+        SCREENS.HOME_SCREEN,
+        () => withRedux(HomeScreen),
+        () => HomeScreen
     );
 };
 

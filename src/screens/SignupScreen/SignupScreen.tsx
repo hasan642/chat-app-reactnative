@@ -22,6 +22,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { signupFormValidator } from 'utils';
 import { goBack } from 'navigation';
 import { COLOR, scaleSize } from 'theme';
+import { useDispatch } from 'react-redux';
+import { registerWithEmailAndPasswordAction } from 'redux/slices/userSlice';
 
 /**
  * type checking
@@ -77,6 +79,11 @@ function SignupScreen({ componentId }: SignupScreenProps) {
     );
 
     /**
+     * Use dispatch.
+     */
+    const dispatch = useDispatch();
+
+    /**
      * Focuses on password input.
      */
     const focusOnPasswordInput = () => {
@@ -86,8 +93,8 @@ function SignupScreen({ componentId }: SignupScreenProps) {
     /**
      * Handles submit for login.
      */
-    const onSubmit = (payload: FormInputs) => {
-        console.log({ payload });
+    const onSubmit = ({ email, password }: FormInputs) => {
+        dispatch(registerWithEmailAndPasswordAction(email, password));
     };
 
     /**

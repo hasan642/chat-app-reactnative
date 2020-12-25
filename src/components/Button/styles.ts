@@ -6,6 +6,7 @@
  */
 
 import { StyleSheet } from 'react-native';
+import { COLOR } from 'theme';
 
 /**
  * A styles for Button.
@@ -15,6 +16,15 @@ const styles = StyleSheet.create({
     width: '100%'
   }
 });
+
+/**
+ * the theme of button.
+ */
+export const theme = {
+  colors: {
+    primary: COLOR.royalBlue
+  }
+};
 
 /**
  * export as default.
