@@ -24,7 +24,7 @@ interface InputProps {
     secureTextEntry?: boolean;
     style?: TextStyle;
     errorMessage?: string;
-    onSubmitEditing?: (val: string) => void;
+    onSubmitEditing?: (val?: string) => void;
 };
 
 /**

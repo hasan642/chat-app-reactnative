@@ -101,3 +101,32 @@ export function pushToStack(
 export function goBack(currentComponentId: string) {
     Navigation.pop(currentComponentId);
 };
+
+/**
+ * Toggles a modal.
+ * 'componentId' is required when meeds to hide.
+ * 'screenName' is required when needs to show.
+ */
+export function toggleModal({
+    action,
+    screenName,
+    componentId,
+    propsToPassed,
+}: {
+    action: 'SHOW' | 'HIDE';
+    screenName?: Screens;
+    componentId?: string;
+    propsToPassed?: Object
+}) {
+    if (action === 'SHOW') {
+        Navigation.showModal({
+            component: {
+                id: SCREENS[screenName],
+                name: SCREENS[screenName],
+                passProps: propsToPassed
+            }
+        });
+    } else {
+        Navigation.dismissModal(componentId);
+    };
+};

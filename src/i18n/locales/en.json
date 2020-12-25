@@ -2,7 +2,8 @@
     "common": {
         "welcomeToChatsy": "Welcome to Chatsy",
         "email": "Email",
-        "password": "Password"
+        "password": "Password",
+        "create": "Create"
     },
     "loginScreen": {
         "login": "Login",
@@ -12,6 +13,13 @@
         "registerToChat": "Register to start chatting",
         "signup": "Signup"
     },
+    "homeScreen": {
+        "name": "Home"
+    },
+    "addRoomScreen": {
+        "createRoom": "Create a new chat room",
+        "roomName": "Room name"
+    },
     "validation": {
         "fieldRequired": "Field is required",
         "passwordLengthError": "Password should be {{length}} letters at least",
@@ -19,6 +27,7 @@
         "emailUsed": "Email is already used",
         "invalidCredentials": "invalid credentials",
         "userNotFound": "User not found",
-        "unknownError": "Unknown error"
+        "unknownError": "Unknown error",
+        "roomNameLengthError": "Room name should be 2 characters at least"
     }
 }

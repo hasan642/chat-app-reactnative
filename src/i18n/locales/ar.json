@@ -2,7 +2,8 @@
     "common": {
         "welcomeToChatsy": "أهلا بك في تطبيق شاتسي",
         "email": "البريد الإلكتروني",
-        "password": "كلمة المرور"
+        "password": "كلمة المرور",
+        "create": "إنشاء"
     },
     "loginScreen": {
         "login": "تسجيل الدخول",
@@ -12,6 +13,13 @@
         "registerToChat": "انشئ حساب لبدء المحادثة",
         "signup": "إنشاء حساب"
     },
+    "homeScreen": {
+        "name": "الرئيسية"
+    },
+    "addRoomScreen": {
+        "createRoom": "اضافة غرفة دردشة جديدة",
+        "roomName": "اسم الغرفة"
+    },
     "validation": {
         "fieldRequired": "الحقل مطلوب",
         "passwordLengthError": "كلمة المرور يجب ان تكون {{length}} على الأقل",
@@ -19,6 +27,7 @@
         "emailUsed": "البريد الالكتروني مستخدم بالفعل",
         "invalidCredentials": "معلومات غير صالحة",
         "userNotFound": "المستخدم غير مسجل",
-        "unknownError": "خطأ غير محدد"
+        "unknownError": "خطأ غير محدد",
+        "roomNameLengthError": "اسم الغرفة يجب ان يكون حرفين على الأقل"
     }
 }

@@ -9,14 +9,23 @@ import { Navigation } from "react-native-navigation";
 import {
     LoginScreen,
     SignupScreen,
-    HomeScreen
+    HomeScreen,
+    AddRoomScreen
 } from 'screens';
-import { withRedux } from "./providers";
+import { withRedux, withSafeArea } from "./providers";
 
 /**
  * constants.
  */
-const prefix = 'com.medium';
+const prefix = 'com.chatsy';
+const modalPrefix = 'com.chatsy.modal';
+
+/**
+ * modal names.
+ */
+const modalNames = {
+    ADD_ROOM: `${modalPrefix}.addRoomScreen`,
+};
 
 /**
  * screen names.
@@ -25,6 +34,7 @@ export const SCREENS = Object.freeze({
     LOGIN_SCRREN: `${prefix}.loginScreen`,
     SIGNUP_SCRREN: `${prefix}.signupScreen`,
     HOME_SCREEN: `${prefix}.homeScreen`,
+    ...modalNames
 });
 
 /**
@@ -45,8 +55,13 @@ export function registerScreens() {
 
     Navigation.registerComponent(
         SCREENS.HOME_SCREEN,
-        () => withRedux(HomeScreen),
         () => HomeScreen
+    );
+
+    Navigation.registerComponent(
+        SCREENS.ADD_ROOM,
+        () => withSafeArea(AddRoomScreen),
+        () => AddRoomScreen
     );
 };
 
