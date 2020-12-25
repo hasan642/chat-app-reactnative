@@ -8,30 +8,25 @@
 import * as yup from "yup";
 
 /**
- * common validations.
- */
-const requiredField = (error: string) => yup.string()
-    .required(error);
-const passwordField = (
-    requiredError: string,
-    min: number,
-    minError: string
-) => yup.string()
-    .required(requiredError)
-    .min(min, minError);
-
-/**
  * A login screen validator.
  */
 export const loginFormValidator = () => yup.object().shape({
-    email: requiredField('email is required'),
-    password: passwordField('password required', 4, 'should be 4 at least')
+    email: yup.string()
+        .required('Email is required')
+        .email('Email is not valid'),
+    password: yup.string()
+        .required('Password is required')
+        .min(6, 'Password should be 4 letters at least')
 });
 
 /**
  * A signup screen validator.
  */
 export const signupFormValidator = () => yup.object().shape({
-    email: requiredField('email is required'),
-    password: passwordField('password required', 4, 'should be 4 at least')
+    email: yup.string()
+        .required('Email is required')
+        .email('Email is not valid'),
+    password: yup.string()
+        .required('Password is required')
+        .min(6, 'Password should be 4 letters at least')
 });

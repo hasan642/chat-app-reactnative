@@ -21,6 +21,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { loginFormValidator } from 'utils';
 import { NavigationComponentProps } from 'react-native-navigation';
 import { pushToStack } from 'navigation';
+import { useDispatch } from 'react-redux';
+import { registerWithEmailAndPasswordAction } from 'redux/slices/userSlice';
 
 /**
  * type checking.
@@ -57,6 +59,11 @@ function LoginScreen({ componentId }: LoginScreenProps) {
     });
 
     /**
+     * User redux dispatch.
+     */
+    const dispatch = useDispatch();
+
+    /**
      * Registeres inputs for validation.
      */
     useEffect(
@@ -85,8 +92,8 @@ function LoginScreen({ componentId }: LoginScreenProps) {
     /**
      * Handles submit for login.
      */
-    const onSubmit = (payload: FormInputs) => {
-        console.log({ payload });
+    const onSubmit = ({ email, password }: FormInputs) => {
+        dispatch(registerWithEmailAndPasswordAction(email, password));
     };
 
     /**
