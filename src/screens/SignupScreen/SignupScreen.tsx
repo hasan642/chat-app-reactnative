@@ -16,7 +16,10 @@ import {
 } from 'react-native';
 import styles from './styles';
 import { NavigationComponentProps } from 'react-native-navigation';
-import { Title, IconButton } from 'react-native-paper';
+import {
+    Title,
+    IconButton
+} from 'react-native-paper';
 import {
     Input,
     Button,
@@ -26,14 +29,21 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signupFormValidator } from 'utils';
 import { goBack } from 'navigation';
-import { COLOR, scaleSize } from 'theme';
+import {
+    COLOR,
+    scaleSize
+} from 'theme';
 import {
     useDispatch,
     useSelector
 } from 'react-redux';
-import { signup, userSelector } from 'redux/slices/userSlice';
+import {
+    signup,
+    userSelector
+} from 'redux/slices/userSlice';
 import { translate } from 'i18n';
 import { SnackBarRef } from 'components/SnackBar/SnackBar';
+import { Options } from 'react-native-navigation';
 
 /**
  * type checking
@@ -185,6 +195,15 @@ function SignupScreen({ componentId }: SignupScreenProps) {
         />
     </View>);
 };
+
+/**
+ * custom navigation options.
+ */
+SignupScreen.options = {
+    topBar: {
+        visible: false
+    }
+} as Options;
 
 /**
  * export as default.

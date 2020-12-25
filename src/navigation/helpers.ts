@@ -11,6 +11,10 @@ import {
     SCREENS,
     Screens
 } from "./screens";
+import {
+    COLOR,
+    scaleFont
+} from "theme";
 
 /**
  * A function helper that goes to app.
@@ -37,7 +41,14 @@ export async function goToApp() {
 export function setDefaultOptions() {
     Navigation.setDefaultOptions({
         topBar: {
-            visible: false
+            visible: true,
+            background: {
+                color: COLOR.royalBlue
+            },
+            title: {
+                fontSize: scaleFont(22),
+                color: COLOR.light
+            }
         },
     })
 };

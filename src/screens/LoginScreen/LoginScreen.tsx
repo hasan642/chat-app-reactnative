@@ -21,7 +21,7 @@ import {
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginFormValidator } from 'utils';
-import { NavigationComponentProps } from 'react-native-navigation';
+import { NavigationComponentProps, Options } from 'react-native-navigation';
 import { pushToStack } from 'navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -183,6 +183,15 @@ function LoginScreen({ componentId }: LoginScreenProps) {
         />
     </View>);
 };
+
+/**
+ * custom navigation options.
+ */
+LoginScreen.options = {
+    topBar: {
+        visible: false
+    }
+} as Options;
 
 /**
  * export as default.
