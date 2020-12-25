@@ -6,7 +6,11 @@
  */
 
 import { StyleSheet } from 'react-native';
-import { COLOR, PADDINGS, MARGINS } from 'theme';
+import {
+  COLOR,
+  PADDINGS,
+  MARGINS
+} from 'theme';
 
 /**
  * A styles for HomeScreen.
@@ -21,7 +25,7 @@ const styles = StyleSheet.create({
   },
   btn: {
     marginBottom: MARGINS.NORMAL
-  }
+  },
 });
 
 /**
