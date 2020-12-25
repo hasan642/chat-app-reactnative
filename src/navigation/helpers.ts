@@ -1,4 +1,3 @@
-
 /**
  * helpers.ts
  * developed by Hasan Alawneh.

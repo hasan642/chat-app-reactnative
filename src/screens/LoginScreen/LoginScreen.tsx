@@ -23,6 +23,7 @@ import { NavigationComponentProps } from 'react-native-navigation';
 import { pushToStack } from 'navigation';
 import { useDispatch } from 'react-redux';
 import { registerWithEmailAndPasswordAction } from 'redux/slices/userSlice';
+import { translate } from 'i18n';
 
 /**
  * type checking.
@@ -108,24 +109,24 @@ function LoginScreen({ componentId }: LoginScreenProps) {
 
     return (<View style={styles.container}>
         <Title style={styles.titleText}>
-            {'Welcome to Chat app'}
+            {translate('common.welcomeToChatsy')}
         </Title>
         <Input
-            label='Email'
+            label={translate('common.email')}
             onChangeText={email => setValue('email', email)}
             onSubmitEditing={focusOnPasswordInput}
             errorMessage={errors.email && errors.email.message}
         />
         <Input
             ref={passwordInput}
-            label='Password'
+            label={translate('common.password')}
             secureTextEntry
             onChangeText={password => setValue('password', password)}
             style={styles.passwordInput}
             errorMessage={errors.password && errors.password.message}
         />
         <Button
-            title='Login'
+            title={translate('loginScreen.login')}
             mode='contained'
             labelStyle={styles.loginButtonLabel}
             style={styles.loginBtnStyle}
@@ -133,7 +134,7 @@ function LoginScreen({ componentId }: LoginScreenProps) {
         />
         <Button
             onPress={navigateToSignup}
-            title='New user? Join here'
+            title={translate('loginScreen.newUser')}
             mode='text'
             uppercase={false}
             labelStyle={styles.navButtonText}

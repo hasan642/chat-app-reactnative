@@ -1,0 +1,15 @@
+{
+    "common": {
+        "welcomeToChatsy": "أهلا بك في تطبيق شاتسي",
+        "email": "البريد الإلكتروني",
+        "password": "كلمة المرور"
+    },
+    "loginScreen": {
+        "login": "تسجيل الدخول",
+        "newUser": "مستخدم جديد؟ سجل الأن"
+    },
+    "signupScreen": {
+        "registerToChat": "انشئ حساب لبدء المحادثة",
+        "signup": "إنشاء حساب"
+    }
+}
