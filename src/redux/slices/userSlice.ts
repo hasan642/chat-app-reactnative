@@ -16,7 +16,8 @@ import {
 import { SLICES_NAMES } from '../constants';
 import {
     registerWithEmailAndPassword,
-    loginWithEmailAndPassword
+    loginWithEmailAndPassword,
+    StorageHelper
 } from "utils";
 import { Dispatch } from "react";
 
@@ -110,13 +111,21 @@ export function signup(
             );
 
             /**
-             * create local user.
+             * create a local user.
              */
             const localUser: LocalUser = {
                 email: user.email,
                 creationTime: user.metadata.creationTime,
                 uid: user.uid
             };
+
+            /**
+             * save user to storage.
+             */
+            StorageHelper.save(
+                '@User',
+                localUser
+            );
 
             /**
              * save user to redux.
@@ -158,13 +167,21 @@ export function login(
             );
 
             /**
-             * create local user.
+             * create a local user.
              */
             const localUser: LocalUser = {
                 email: user.email,
                 creationTime: user.metadata.creationTime,
                 uid: user.uid
             };
+
+            /**
+             * save user to storage.
+             */
+            StorageHelper.save(
+                '@User',
+                localUser
+            );
 
             /**
              * save user to redux.

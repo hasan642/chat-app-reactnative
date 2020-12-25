@@ -22,15 +22,20 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginFormValidator } from 'utils';
 import { NavigationComponentProps, Options } from 'react-native-navigation';
-import { pushToStack } from 'navigation';
-import { useDispatch, useSelector } from 'react-redux';
+import {
+    pushToStack,
+    goToAppStack
+} from 'navigation';
+import {
+    useDispatch,
+    useSelector
+} from 'react-redux';
 import {
     login,
     userSelector
 } from 'redux/slices/userSlice';
 import { translate } from 'i18n';
 import { SnackBarRef } from 'components/SnackBar/SnackBar';
-import { resetUserState } from 'redux/slices';
 
 /**
  * type checking.
@@ -101,7 +106,8 @@ function LoginScreen({ componentId }: LoginScreenProps) {
      */
     const {
         loading,
-        error
+        error,
+        success
     } = useSelector(userSelector);
 
     /**
@@ -112,9 +118,14 @@ function LoginScreen({ componentId }: LoginScreenProps) {
             if (error) {
                 setErrorMessage(error);
                 snackBarRef.current.show();
+            } else if (success) {
+                goToAppStack();
             };
         },
-        [error]
+        [
+            error,
+            success
+        ]
     );
 
     /**

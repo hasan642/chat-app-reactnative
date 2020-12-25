@@ -28,7 +28,10 @@ import {
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signupFormValidator } from 'utils';
-import { goBack } from 'navigation';
+import {
+    goBack,
+    goToAppStack
+} from 'navigation';
 import {
     COLOR,
     scaleSize
@@ -109,7 +112,8 @@ function SignupScreen({ componentId }: SignupScreenProps) {
      */
     const {
         loading,
-        error
+        error,
+        success
     } = useSelector(userSelector);
 
     /**
@@ -120,9 +124,14 @@ function SignupScreen({ componentId }: SignupScreenProps) {
             if (error) {
                 setErrorMessage(error);
                 snackBarRef.current.show();
+            } else if (success) {
+                goToAppStack()
             };
         },
-        [error]
+        [
+            error,
+            success
+        ]
     );
 
     /**

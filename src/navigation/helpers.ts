@@ -6,7 +6,10 @@
  */
 
 import { Navigation } from "react-native-navigation";
-import { ROOT } from "./contants";
+import {
+    AUTH_STACK,
+    APP_STACK
+} from "./contants";
 import {
     SCREENS,
     Screens
@@ -17,17 +20,36 @@ import {
 } from "theme";
 
 /**
- * A function helper that goes to app.
+ * A function helper that goes to auth stack.
  */
-export async function goToApp() {
+export async function goToAuthStack() {
     Navigation.setRoot({
         root: {
             stack: {
-                id: ROOT,
+                id: AUTH_STACK,
                 children: [{
                     component: {
                         id: SCREENS.LOGIN_SCRREN,
                         name: SCREENS.LOGIN_SCRREN
+                    }
+                }]
+            }
+        }
+    });
+};
+
+/**
+ * A function helper that goes to app.
+ */
+export async function goToAppStack() {
+    Navigation.setRoot({
+        root: {
+            stack: {
+                id: APP_STACK,
+                children: [{
+                    component: {
+                        id: SCREENS.HOME_SCREEN,
+                        name: SCREENS.HOME_SCREEN
                     }
                 }]
             }

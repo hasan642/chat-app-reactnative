@@ -10,6 +10,8 @@ import { View } from 'react-native';
 import styles from './styles';
 import { Title } from 'react-native-paper';
 import { Button } from 'components';
+import { StorageHelper } from 'utils';
+import { goToAuthStack } from 'navigation';
 
 /**
  * type checking
@@ -26,6 +28,10 @@ function HomeScreen(props: HomeScreenProps) {
         <Title>Home Screen</Title>
         <Title>All chat rooms will be listed here</Title>
         <Button
+            onPress={() => {
+                StorageHelper.clear('@User');
+                goToAuthStack();
+            }}
             mode='contained'
             title='Logout'
         />

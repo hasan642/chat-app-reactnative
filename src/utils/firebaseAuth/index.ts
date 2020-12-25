@@ -57,7 +57,7 @@ function handleFirebaseErrorByCode(errorCode: string): string {
     /**
      * start with unknown error as default..
      */
-    let errorMessage: string = 'Unknown error';
+    let errorMessage: string = translate('validation.unknownError');
 
     /**
      * check error by code.
@@ -69,6 +69,10 @@ function handleFirebaseErrorByCode(errorCode: string): string {
 
         case 'auth/wrong-password':
             errorMessage = translate('validation.invalidCredentials');
+            break;
+
+        case 'auth/user-not-found':
+            errorMessage = translate('validation.userNotFound');
             break;
     };
 

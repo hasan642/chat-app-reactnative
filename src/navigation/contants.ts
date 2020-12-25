@@ -5,4 +5,5 @@
  * created at: 21/12/2020
  */
 
-export const ROOT = 'ROOT';
+export const AUTH_STACK = 'AUTH_STACK';
+export const APP_STACK = 'APP_STACK';
