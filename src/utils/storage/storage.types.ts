@@ -6,11 +6,12 @@
  */
 
 import { LanguagesKeys } from 'i18n';
+import { LocalUser } from 'redux/types';
 
 /**
  * The keys types.
  */
-export type Key = '@Language';
+export type Key = '@Language' | '@User';
 
 /**
  * The language model.
@@ -21,6 +22,11 @@ export interface LanguageModel {
 };
 
 /**
+ * The user model.
+ */
+export interface UserModel extends LocalUser { };
+
+/**
  * The type of storage models.
  */
-export type StorageModel = LanguageModel;
+export type StorageModel = LanguageModel | UserModel;

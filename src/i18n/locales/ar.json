@@ -17,6 +17,8 @@
         "passwordLengthError": "كلمة المرور يجب ان تكون {{length}} على الأقل",
         "emailNotValid": "البريد الالكتروني غير صالح",
         "emailUsed": "البريد الالكتروني مستخدم بالفعل",
-        "invalidCredentials": "معلومات غير صالحة"
+        "invalidCredentials": "معلومات غير صالحة",
+        "userNotFound": "المستخدم غير مسجل",
+        "unknownError": "خطأ غير محدد"
     }
 }
