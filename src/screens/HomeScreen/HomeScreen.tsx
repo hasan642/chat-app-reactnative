@@ -11,8 +11,14 @@ import styles from './styles';
 import { Title } from 'react-native-paper';
 import { Button } from 'components';
 import { StorageHelper } from 'utils';
-import { goToAuthStack, toggleModal, SCREENS } from 'navigation';
-import { Options, Navigation } from 'react-native-navigation';
+import {
+    goToAuthStack,
+    toggleModal
+} from 'navigation';
+import {
+    Options,
+    Navigation
+} from 'react-native-navigation';
 import { translate } from 'i18n';
 
 /**

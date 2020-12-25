@@ -6,7 +6,12 @@
  */
 
 import { StyleSheet } from 'react-native';
-import { COLOR, scaleFont, MARGINS, PADDINGS } from 'theme';
+import {
+  COLOR,
+  scaleFont,
+  MARGINS,
+  PADDINGS
+} from 'theme';
 
 /**
  * A styles for AddRoomScreen.
