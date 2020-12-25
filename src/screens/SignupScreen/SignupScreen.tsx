@@ -17,13 +17,20 @@ import {
 import styles from './styles';
 import { NavigationComponentProps } from 'react-native-navigation';
 import { Title, IconButton } from 'react-native-paper';
-import { Input, Button, SnackBar } from 'components';
+import {
+    Input,
+    Button,
+    SnackBar
+} from 'components';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signupFormValidator } from 'utils';
 import { goBack } from 'navigation';
 import { COLOR, scaleSize } from 'theme';
-import { useDispatch, useSelector } from 'react-redux';
+import {
+    useDispatch,
+    useSelector
+} from 'react-redux';
 import { signup, userSelector } from 'redux/slices/userSlice';
 import { translate } from 'i18n';
 import { SnackBarRef } from 'components/SnackBar/SnackBar';
