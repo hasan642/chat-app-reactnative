@@ -1,7 +1,7 @@
 /**
- * validator.ts
+ * firebaseAuth.ts
  * developed by Hasan Alawneh.
- * A file that contains an auth functions with firebase.
+ * A file that contains the auth functions with firebase.
  * created at: 24/12/2020
  */
 

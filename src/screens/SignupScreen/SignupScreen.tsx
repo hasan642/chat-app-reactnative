@@ -16,14 +16,12 @@ import {
 } from 'react-native';
 import styles from './styles';
 import { NavigationComponentProps } from 'react-native-navigation';
-import {
-    Title,
-    IconButton
-} from 'react-native-paper';
+import { Title } from 'react-native-paper';
 import {
     Input,
     Button,
-    SnackBar
+    SnackBar,
+    PaperIcon
 } from 'components';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -187,14 +185,10 @@ function SignupScreen({ componentId }: SignupScreenProps) {
             loading={loading}
             disabled={loading}
         />
-        <IconButton
-
-            {...{} as any}
-
+        <PaperIcon
             icon='keyboard-backspace'
             size={scaleSize(28)}
             style={styles.backIcon}
-            color={COLOR.royalBlue}
             onPress={backToLogin}
         />
 

@@ -28,6 +28,6 @@
         "invalidCredentials": "معلومات غير صالحة",
         "userNotFound": "المستخدم غير مسجل",
         "unknownError": "خطأ غير محدد",
-        "roomNameLengthError": "اسم الغرفة يجب ان يكون حرفين على الأقل"
+        "roomNameLengthError": "اسم الغرفة يجب ان يتكون من حرفين على الأقل"
     }
 }

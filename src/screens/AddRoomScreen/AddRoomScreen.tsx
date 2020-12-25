@@ -24,7 +24,10 @@ import { Title } from 'react-native-paper';
 import { translate } from 'i18n';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { addRoomValidator } from 'utils';
+import {
+    addRoomValidator,
+    createRoom
+} from 'utils';
 
 /**
  * type checking
@@ -34,6 +37,7 @@ interface AddRoomScreenProps extends NavigationComponentProps {
 };
 type FormInputs = {
     roomName: string;
+    roomDescription: string;
 };
 
 /**
@@ -71,12 +75,14 @@ function AddRoomScreen({ componentId }: AddRoomScreenProps) {
     useEffect(
         () => {
             register('roomName');
+            register('roomDescription');
 
             /**
              * clean up function.
              */
             return () => {
                 unregister('roomName');
+                unregister('roomDescription');
             };
         },
         []
@@ -85,8 +91,38 @@ function AddRoomScreen({ componentId }: AddRoomScreenProps) {
     /**
      * Handles add room press.
      */
-    const handleAddRoomPress = ({ roomName }: FormInputs) => {
-        console.log({ payload: roomName });
+    const handleAddRoomPress = async ({ roomName }: FormInputs) => {
+
+        /**
+         * turn on loader.
+         */
+        setAddingRoom(true);
+
+        /**
+         * add the room to firestore.
+         */
+        await createRoom(roomName);
+
+        /**
+         * turn off the loader.
+         */
+        setAddingRoom(false);
+
+        /**
+         * finally cloe the modal.
+         */
+        closeModal();
+
+    };
+
+    /**
+     * Closes the modal.
+     */
+    const closeModal = () => {
+        toggleModal({
+            action: 'HIDE',
+            componentId
+        })
     };
 
     return (<SafeAreaView
@@ -95,10 +131,7 @@ function AddRoomScreen({ componentId }: AddRoomScreenProps) {
     >
         <PaperIcon
             icon={'close-circle'}
-            onPress={() => toggleModal({
-                action: 'HIDE',
-                componentId
-            })}
+            onPress={closeModal}
             size={scaleSize(30)}
         />
 
@@ -112,6 +145,7 @@ function AddRoomScreen({ componentId }: AddRoomScreenProps) {
                 onSubmitEditing={() => handleSubmit(handleAddRoomPress)()}
                 errorMessage={errors.roomName && errors.roomName.message}
             />
+
             <Button
                 title={translate('common.create')}
                 onPress={handleSubmit(handleAddRoomPress)}

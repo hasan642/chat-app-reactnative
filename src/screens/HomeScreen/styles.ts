@@ -8,8 +8,9 @@
 import { StyleSheet } from 'react-native';
 import {
   COLOR,
-  PADDINGS,
-  MARGINS
+  MARGINS,
+  scaleFont,
+  PADDINGS
 } from 'theme';
 
 /**
@@ -19,13 +20,24 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: COLOR.wildSand,
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: PADDINGS.LARGE
   },
   btn: {
     marginBottom: MARGINS.NORMAL
   },
+  listTitle: {
+    fontSize: scaleFont(22)
+  },
+  listDescription: {
+    fontSize: scaleFont(16),
+    paddingTop: PADDINGS.SMALL
+  },
+  fab: {
+    position: 'absolute',
+    margin: 16,
+    right: 0,
+    bottom: 0,
+    backgroundColor:COLOR.royalBlue
+  }
 });
 
 /**

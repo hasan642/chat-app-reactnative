@@ -5,26 +5,35 @@
  * created at: 21/12/2020
  */
 
-import React, { useEffect } from 'react';
-import { View } from 'react-native';
-import styles from './styles';
-import { Title } from 'react-native-paper';
-import { Button } from 'components';
-import { StorageHelper } from 'utils';
+import React, {
+    useEffect,
+    useState
+} from 'react';
 import {
-    goToAuthStack,
-    toggleModal
-} from 'navigation';
+    View,
+    FlatList
+} from 'react-native';
+import styles from './styles';
+import {
+    Divider,
+    List
+} from 'react-native-paper';
+import { toggleModal } from 'navigation';
 import {
     Options,
-    Navigation
+    NavigationComponentProps,
 } from 'react-native-navigation';
 import { translate } from 'i18n';
+import {
+    getChatRooms,
+    ChatRoom
+} from 'utils';
+import { FAB } from 'react-native-paper';
 
 /**
  * type checking
  */
-interface HomeScreenProps {
+interface HomeScreenProps extends NavigationComponentProps {
 
 };
 
@@ -34,46 +43,105 @@ interface HomeScreenProps {
 function HomeScreen(props: HomeScreenProps) {
 
     /**
-     * Listenes to header button press actions.
+     * state.
+     */
+    const [chatRooms, setChatRooms] = useState<ChatRoom[]>();
+
+    /**
+     * Listens and gets data rooms from firebase.
      */
     useEffect(
         () => {
-            // Subscribe
-            const navigationButtonEventListener = Navigation.events().registerNavigationButtonPressedListener(({ buttonId }) => {
-                if (buttonId === 'ADD_ROOM_ICON') {
-                    toggleModal({
-                        action: 'SHOW',
-                        screenName: 'ADD_ROOM'
-                    })
-                };
-            });
+
+            /**
+             * Gets and serizlizes the chat rooms.
+             */
+            const unsubscribe = getChatRooms()
+                .onSnapshot(({ docs: roomCollections }) => {
+
+                    /**
+                     * transform room collection.
+                     */
+                    const chatRooms: ChatRoom[] = roomCollections.map(docSnapShot => {
+                        return {
+                            id: docSnapShot.id,
+                            ...docSnapShot.data() as ChatRoom
+                        };
+                    });
+
+                    /**
+                     * update the chat rooms.
+                     */
+                    setChatRooms(chatRooms);
+                });
 
             /**
              * clean up function.
              */
-            return () => navigationButtonEventListener.remove();
+            return unsubscribe;
         },
         []
     );
 
+    /**
+     * Renderes chat room.
+     */
+    const renderChatRoom = ({ item }: { item: ChatRoom }) => {
+        return (
+            <List.Item
+
+                {...{} as any}
+
+                title={item.name}
+                description={item.creationDate}
+                titleNumberOfLines={1}
+                titleStyle={styles.listTitle}
+                descriptionStyle={styles.listDescription}
+                descriptionNumberOfLines={1}
+                onPress={handleChatRoomPress}
+            />
+        );
+    };
+
+    /**
+     * Renderes item seperator component.
+     */
+    const renderDivider = () => <Divider {...{} as any} />;
+
+    /**
+     * Handles chat room press.
+     */
+    const handleChatRoomPress = () => {
+
+    };
+
+    /**
+     * Handles fab press.
+     */
+    const handleFabPress = () => {
+        toggleModal({
+            action: 'SHOW',
+            screenName: 'ADD_ROOM'
+        });
+    };
+
     return (<View style={styles.container}>
-        <Title>Home Screen</Title>
-        <Title>All chat rooms will be listed here</Title>
-        <Button
-            onPress={() => {
-                StorageHelper.clear('@User');
-                goToAuthStack();
-            }}
-            mode='contained'
-            title='Logout'
+        <FlatList
+            data={chatRooms}
+            renderItem={renderChatRoom}
+            keyExtractor={item => item.id}
+            ItemSeparatorComponent={renderDivider}
+            showsVerticalScrollIndicator={false}
         />
-        <Button
-            onPress={() => toggleModal({
-                action: 'SHOW',
-                screenName: 'ADD_ROOM'
-            })}
-            mode='contained'
-            title='Add room'
+
+        <FAB
+
+            {...{} as any}
+
+            style={styles.fab}
+            small
+            icon="plus"
+            onPress={handleFabPress}
         />
     </View>);
 };
@@ -83,20 +151,15 @@ function HomeScreen(props: HomeScreenProps) {
  * 
  * as a function to make 'translate' function works well.
  */
-HomeScreen.options = (): Options => ({
-    topBar: {
-        title: {
-            text: translate('homeScreen.name')
-        },
-        rightButtons: [
-            {
-                id: 'ADD_ROOM_ICON',
-                showAsAction: 'always',
-                icon: require('assets/chat.png'),
-            },
-        ]
-    },
-});
+HomeScreen.options = (): Options => {
+    return {
+        topBar: {
+            title: {
+                text: translate('homeScreen.name')
+            }
+        }
+    }
+};
 
 /**
  * export as default.
