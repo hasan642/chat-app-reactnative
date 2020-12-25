@@ -11,5 +11,12 @@
     "signupScreen": {
         "registerToChat": "Register to start chatting",
         "signup": "Signup"
+    },
+    "validation": {
+        "fieldRequired": "Field is required",
+        "passwordLengthError": "Password should be {{length}} letters at least",
+        "emailNotValid": "Email is not valid",
+        "emailUsed": "Email is already used",
+        "invalidCredentials": "invalid credentials"
     }
 }

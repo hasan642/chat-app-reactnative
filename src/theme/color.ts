@@ -9,7 +9,8 @@ export const COLOR = Object.freeze({
     light: '#FFF',
     dark: '#000',
     wildSand: "#F5F5F5",
-    royalBlue: '#6646ee'
+    royalBlue: '#6646ee',
+    error: '#FF3333'
 });
 
 /**

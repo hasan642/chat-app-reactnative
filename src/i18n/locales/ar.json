@@ -11,5 +11,12 @@
     "signupScreen": {
         "registerToChat": "انشئ حساب لبدء المحادثة",
         "signup": "إنشاء حساب"
+    },
+    "validation": {
+        "fieldRequired": "الحقل مطلوب",
+        "passwordLengthError": "كلمة المرور يجب ان تكون {{length}} على الأقل",
+        "emailNotValid": "البريد الالكتروني غير صالح",
+        "emailUsed": "البريد الالكتروني مستخدم بالفعل",
+        "invalidCredentials": "معلومات غير صالحة"
     }
 }

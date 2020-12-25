@@ -6,17 +6,18 @@
  */
 
 import * as yup from "yup";
+import { translate } from "i18n";
 
 /**
  * A login screen validator.
  */
 export const loginFormValidator = () => yup.object().shape({
     email: yup.string()
-        .required('Email is required')
-        .email('Email is not valid'),
+        .required(translate('validation.fieldRequired'))
+        .email(translate('validation.emailNotValid')),
     password: yup.string()
-        .required('Password is required')
-        .min(6, 'Password should be 4 letters at least')
+        .required(translate('validation.fieldRequired'))
+        .min(6, translate('validation.passwordLengthError', { length: 6 }))
 });
 
 /**
@@ -24,9 +25,9 @@ export const loginFormValidator = () => yup.object().shape({
  */
 export const signupFormValidator = () => yup.object().shape({
     email: yup.string()
-        .required('Email is required')
-        .email('Email is not valid'),
+        .required(translate('validation.fieldRequired'))
+        .email(translate('validation.emailNotValid')),
     password: yup.string()
-        .required('Password is required')
-        .min(6, 'Password should be 4 letters at least')
+        .required(translate('validation.fieldRequired'))
+        .min(6, translate('validation.passwordLengthError', { length: 6 }))
 });

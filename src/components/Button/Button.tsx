@@ -24,6 +24,8 @@ interface ButtonProps {
     mode?: 'text' | 'outlined' | 'contained';
     uppercase?: boolean;
     onPress?: () => void;
+    loading?: boolean;
+    disabled?: boolean;
 };
 
 /**
@@ -35,7 +37,9 @@ function Button({
     labelStyle,
     style: overrideStyle,
     uppercase = true,
-    onPress
+    onPress,
+    loading,
+    disabled
 }: ButtonProps) {
     return (<RNPaperBtn
 
@@ -47,6 +51,8 @@ function Button({
                 overrideStyle
             ]
         }
+        disabled={disabled}
+        loading={loading}
         mode={mode}
         labelStyle={labelStyle}
         uppercase={uppercase}
