@@ -24,6 +24,7 @@ import { goBack } from 'navigation';
 import { COLOR, scaleSize } from 'theme';
 import { useDispatch } from 'react-redux';
 import { registerWithEmailAndPasswordAction } from 'redux/slices/userSlice';
+import { translate } from 'i18n';
 
 /**
  * type checking
@@ -106,24 +107,24 @@ function SignupScreen({ componentId }: SignupScreenProps) {
 
     return (<View style={styles.container}>
         <Title style={styles.titleText}>
-            {'Register to Chat'}
+            {translate('signupScreen.registerToChat')}
         </Title>
         <Input
-            label='Email'
+             label={translate('common.email')}
             onChangeText={email => setValue('email', email)}
             onSubmitEditing={focusOnPasswordInput}
             errorMessage={errors.email && errors.email.message}
         />
         <Input
             ref={passwordInput}
-            label='Password'
+            label={translate('common.password')}
             secureTextEntry
             onChangeText={password => setValue('password', password)}
             style={styles.passwordInput}
             errorMessage={errors.password && errors.password.message}
         />
         <Button
-            title='SIGNUP'
+            title={translate('signupScreen.signup')}
             mode='contained'
             labelStyle={styles.loginButtonLabel}
             style={styles.loginBtnStyle}

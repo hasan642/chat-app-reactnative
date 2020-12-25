@@ -1,0 +1,15 @@
+{
+    "common": {
+        "welcomeToChatsy": "Welcome to Chatsy",
+        "email": "Email",
+        "password": "Password"
+    },
+    "loginScreen": {
+        "login": "Login",
+        "newUser": "New user? Join here"
+    },
+    "signupScreen": {
+        "registerToChat": "Register to start chatting",
+        "signup": "Signup"
+    }
+}
