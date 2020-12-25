@@ -6,6 +6,7 @@
  */
 
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
+import { translate } from 'i18n';
 
 /**
  * Logins with email and password.
@@ -13,12 +14,11 @@ import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 export async function loginWithEmailAndPassword(
     email: string,
     password: string
-): Promise<FirebaseAuthTypes.UserCredential> {
+): Promise<FirebaseAuthTypes.User> {
     try {
         const UserCredential = await auth().signInWithEmailAndPassword(email, password);
-        console.log({ userCredintials: UserCredential });
+        return UserCredential.user;
     } catch (error) {
-        console.log('error in loginWithEmailAndPassword', error);
         return Promise.reject(handleFirebaseErrorByCode(error.code));
     };
 };
@@ -29,12 +29,11 @@ export async function loginWithEmailAndPassword(
 export async function registerWithEmailAndPassword(
     email: string,
     password: string
-): Promise<FirebaseAuthTypes.UserCredential> {
+): Promise<FirebaseAuthTypes.User> {
     try {
         const UserCredential = await auth().createUserWithEmailAndPassword(email, password);
-        console.log({ userCredintials: UserCredential });
+        return UserCredential.user;
     } catch (error) {
-        console.log('error in registerWithEmailAndPassword', error);
         return Promise.reject(handleFirebaseErrorByCode(error.code));
     };
 };
@@ -46,7 +45,6 @@ export async function logout() {
     try {
         await auth().signOut();
     } catch (error) {
-        console.log('error in logout', error);
         return Promise.reject(handleFirebaseErrorByCode(error.code));
     }
 };
@@ -66,7 +64,11 @@ function handleFirebaseErrorByCode(errorCode: string): string {
      */
     switch (errorCode) {
         case 'auth/email-already-in-use':
-            errorMessage = 'Email is already used';
+            errorMessage = translate('validation.emailUsed');
+            break;
+
+        case 'auth/wrong-password':
+            errorMessage = translate('validation.invalidCredentials');
             break;
     };
 

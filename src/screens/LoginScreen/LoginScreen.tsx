@@ -7,23 +7,30 @@
 
 import React, {
     useEffect,
-    useRef
+    useRef,
+    useState
 } from 'react';
 import { View, TextInput } from 'react-native';
 import styles from './styles';
 import { Title } from 'react-native-paper';
 import {
     Input,
-    Button
+    Button,
+    SnackBar
 } from 'components';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginFormValidator } from 'utils';
 import { NavigationComponentProps } from 'react-native-navigation';
 import { pushToStack } from 'navigation';
-import { useDispatch } from 'react-redux';
-import { registerWithEmailAndPasswordAction } from 'redux/slices/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+    login,
+    userSelector
+} from 'redux/slices/userSlice';
 import { translate } from 'i18n';
+import { SnackBarRef } from 'components/SnackBar/SnackBar';
+import { resetUserState } from 'redux/slices';
 
 /**
  * type checking.
@@ -42,9 +49,15 @@ type FormInputs = {
 function LoginScreen({ componentId }: LoginScreenProps) {
 
     /**
+     * state.
+     */
+    const [errorMessage, setErrorMessage] = useState<string>(null);
+
+    /**
      * refs.
      */
     const passwordInput = useRef<TextInput>(null);
+    const snackBarRef = useRef<SnackBarRef>(null);
 
     /**
      * init react hooks form valifation.
@@ -84,6 +97,27 @@ function LoginScreen({ componentId }: LoginScreenProps) {
     );
 
     /**
+     * select data from user selector.
+     */
+    const {
+        loading,
+        error
+    } = useSelector(userSelector);
+
+    /**
+     * Listenes to error and success cases.
+     */
+    useEffect(
+        () => {
+            if (error) {
+                setErrorMessage(error);
+                snackBarRef.current.show();
+            };
+        },
+        [error]
+    );
+
+    /**
      * Focuses on password input.
      */
     const focusOnPasswordInput = () => {
@@ -94,7 +128,7 @@ function LoginScreen({ componentId }: LoginScreenProps) {
      * Handles submit for login.
      */
     const onSubmit = ({ email, password }: FormInputs) => {
-        dispatch(registerWithEmailAndPasswordAction(email, password));
+        dispatch(login(email, password));
     };
 
     /**
@@ -131,13 +165,21 @@ function LoginScreen({ componentId }: LoginScreenProps) {
             labelStyle={styles.loginButtonLabel}
             style={styles.loginBtnStyle}
             onPress={handleSubmit(onSubmit)}
+            loading={loading}
+            disabled={loading}
         />
+
         <Button
             onPress={navigateToSignup}
             title={translate('loginScreen.newUser')}
             mode='text'
             uppercase={false}
             labelStyle={styles.navButtonText}
+        />
+
+        <SnackBar
+            message={errorMessage}
+            ref={snackBarRef}
         />
     </View>);
 };

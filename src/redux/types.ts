@@ -5,10 +5,14 @@
  * created at: 24/12/2020
  */
 
-import { FirebaseAuthTypes } from '@react-native-firebase/auth';
+export type LocalUser = {
+    email: string;
+    creationTime: string;
+    uid: string;
+};
 export interface UserState {
     loading: boolean;
     error: string;
     success: boolean;
-    user: FirebaseAuthTypes.UserCredential;
+    user: LocalUser;
 };

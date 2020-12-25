@@ -5,14 +5,19 @@
  * created at: 24/12/2020
  */
 
-import { UserState } from "redux/types";
+import {
+    UserState,
+    LocalUser
+} from "redux/types";
 import {
     createSlice,
     PayloadAction
 } from "@reduxjs/toolkit";
 import { SLICES_NAMES } from '../constants';
-import { FirebaseAuthTypes } from "@react-native-firebase/auth";
-import { registerWithEmailAndPassword } from "utils";
+import {
+    registerWithEmailAndPassword,
+    loginWithEmailAndPassword
+} from "utils";
 import { Dispatch } from "react";
 
 /**
@@ -42,11 +47,16 @@ const userSlice = createSlice({
             state.error = error;
             state.success = false;
         },
-        setUser: (state, { payload: user }: PayloadAction<FirebaseAuthTypes.UserCredential>) => {
+        setUser: (state, { payload: user }: PayloadAction<LocalUser>) => {
             state.loading = false;
             state.error = null;
             state.success = true;
             state.user = user;
+        },
+        reset: (state) => {
+            state.loading = false;
+            state.error = null;
+            state.success = false;
         },
     },
 });
@@ -58,7 +68,9 @@ const {
     loadUser,
     setError,
     setUser,
+    reset
 } = userSlice.actions;
+export { reset };
 
 /**
  * export all needed from userSlice.
@@ -72,12 +84,17 @@ export default userSlice.reducer;
 /**
  * Registeres with email and password.
  */
-export const registerWithEmailAndPasswordAction = (
+export function signup(
     email: string,
     password: string
-) => {
+): Dispatch<any> {
     return async (dispatch: Dispatch<any>) => {
         try {
+
+            /**
+             * convert email to lowercase.
+             */
+            email = email.toLocaleLowerCase();
 
             /**
              * loading.
@@ -87,19 +104,75 @@ export const registerWithEmailAndPasswordAction = (
             /**
              * register user.
              */
-            const userCredinitial = await registerWithEmailAndPassword(
+            const user = await registerWithEmailAndPassword(
                 email,
                 password
             );
-  
+
+            /**
+             * create local user.
+             */
+            const localUser: LocalUser = {
+                email: user.email,
+                creationTime: user.metadata.creationTime,
+                uid: user.uid
+            };
+
             /**
              * save user to redux.
              */
-            dispatch(setUser(userCredinitial));
+            dispatch(setUser(localUser));
 
         } catch (error) {
-            console.log('error in registerWithEmailAndPassword', error);
-            dispatch(setError(error.message));
+            dispatch(setError(error));
+        };
+    };
+};
+
+/**
+ * Logins with email and password.
+ */
+export function login(
+    email: string,
+    password: string
+): Dispatch<any> {
+    return async (dispatch: Dispatch<any>) => {
+        try {
+
+            /**
+             * convert email to lowercase.
+             */
+            email = email.toLocaleLowerCase();
+
+            /**
+             * loading.
+             */
+            dispatch(loadUser());
+
+            /**
+             * register user.
+             */
+            const user = await loginWithEmailAndPassword(
+                email,
+                password
+            );
+
+            /**
+             * create local user.
+             */
+            const localUser: LocalUser = {
+                email: user.email,
+                creationTime: user.metadata.creationTime,
+                uid: user.uid
+            };
+
+            /**
+             * save user to redux.
+             */
+            dispatch(setUser(localUser));
+
+        } catch (error) {
+            dispatch(setError(error));
         };
     };
 };

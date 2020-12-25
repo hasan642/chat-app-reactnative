@@ -7,7 +7,8 @@
 
 import React, {
     useRef,
-    useEffect
+    useEffect,
+    useState
 } from 'react';
 import {
     View,
@@ -16,15 +17,23 @@ import {
 import styles from './styles';
 import { NavigationComponentProps } from 'react-native-navigation';
 import { Title, IconButton } from 'react-native-paper';
-import { Input, Button } from 'components';
+import {
+    Input,
+    Button,
+    SnackBar
+} from 'components';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signupFormValidator } from 'utils';
 import { goBack } from 'navigation';
 import { COLOR, scaleSize } from 'theme';
-import { useDispatch } from 'react-redux';
-import { registerWithEmailAndPasswordAction } from 'redux/slices/userSlice';
+import {
+    useDispatch,
+    useSelector
+} from 'react-redux';
+import { signup, userSelector } from 'redux/slices/userSlice';
 import { translate } from 'i18n';
+import { SnackBarRef } from 'components/SnackBar/SnackBar';
 
 /**
  * type checking
@@ -43,9 +52,15 @@ type FormInputs = {
 function SignupScreen({ componentId }: SignupScreenProps) {
 
     /**
+     * state.
+     */
+    const [errorMessage, setErrorMessage] = useState<string>(null);
+
+    /**
      * refs.
      */
     const passwordInput = useRef<TextInput>(null);
+    const snackBarRef = useRef<SnackBarRef>(null);
 
     /**
      * init react hooks form valifation.
@@ -55,7 +70,7 @@ function SignupScreen({ componentId }: SignupScreenProps) {
         unregister,
         setValue,
         handleSubmit,
-        errors
+        errors,
     } = useForm<FormInputs>({
         resolver: yupResolver(signupFormValidator()),
     });
@@ -80,6 +95,27 @@ function SignupScreen({ componentId }: SignupScreenProps) {
     );
 
     /**
+     * select data from user selector.
+     */
+    const {
+        loading,
+        error
+    } = useSelector(userSelector);
+
+    /**
+     * Listenes to error and success cases.
+     */
+    useEffect(
+        () => {
+            if (error) {
+                setErrorMessage(error);
+                snackBarRef.current.show();
+            };
+        },
+        [error]
+    );
+
+    /**
      * Use dispatch.
      */
     const dispatch = useDispatch();
@@ -95,7 +131,7 @@ function SignupScreen({ componentId }: SignupScreenProps) {
      * Handles submit for login.
      */
     const onSubmit = ({ email, password }: FormInputs) => {
-        dispatch(registerWithEmailAndPasswordAction(email, password));
+        dispatch(signup(email, password));
     };
 
     /**
@@ -110,7 +146,7 @@ function SignupScreen({ componentId }: SignupScreenProps) {
             {translate('signupScreen.registerToChat')}
         </Title>
         <Input
-             label={translate('common.email')}
+            label={translate('common.email')}
             onChangeText={email => setValue('email', email)}
             onSubmitEditing={focusOnPasswordInput}
             errorMessage={errors.email && errors.email.message}
@@ -129,6 +165,8 @@ function SignupScreen({ componentId }: SignupScreenProps) {
             labelStyle={styles.loginButtonLabel}
             style={styles.loginBtnStyle}
             onPress={handleSubmit(onSubmit)}
+            loading={loading}
+            disabled={loading}
         />
         <IconButton
 
@@ -139,6 +177,11 @@ function SignupScreen({ componentId }: SignupScreenProps) {
             style={styles.backIcon}
             color={COLOR.royalBlue}
             onPress={backToLogin}
+        />
+
+        <SnackBar
+            message={errorMessage}
+            ref={snackBarRef}
         />
     </View>);
 };
