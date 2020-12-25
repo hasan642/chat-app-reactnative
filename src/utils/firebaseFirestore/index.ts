@@ -24,10 +24,13 @@ export async function createRoom(roomName: string) {
             creationDate: new Date().getTime()
         };
 
-        const res = await firestore()
+        /**
+         * Creates the chat room.
+         */
+        await firestore()
             .collection(COLLECTION.CHAT_ROOMS)
             .add(chatRoomToBeAdded);
-        console.log('add room res', res)
+
     } catch (error) {
         console.log('error in createRoom', error);
     }

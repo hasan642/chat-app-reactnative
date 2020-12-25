@@ -37,7 +37,6 @@ interface AddRoomScreenProps extends NavigationComponentProps {
 };
 type FormInputs = {
     roomName: string;
-    roomDescription: string;
 };
 
 /**
@@ -75,14 +74,12 @@ function AddRoomScreen({ componentId }: AddRoomScreenProps) {
     useEffect(
         () => {
             register('roomName');
-            register('roomDescription');
-
+      
             /**
              * clean up function.
              */
             return () => {
                 unregister('roomName');
-                unregister('roomDescription');
             };
         },
         []
