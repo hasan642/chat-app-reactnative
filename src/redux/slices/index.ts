@@ -5,5 +5,5 @@
 export {
     default as userReducer,
     userSelector,
-    reset as resetUserState
+    cacheUser
 } from './userSlice';

@@ -5,7 +5,10 @@
  * created at: 21/12/2020
  */
 
-import { Navigation } from "react-native-navigation";
+import {
+    Navigation,
+    Options
+} from "react-native-navigation";
 import {
     AUTH_STACK,
     APP_STACK
@@ -70,6 +73,9 @@ export function setDefaultOptions() {
             title: {
                 fontSize: scaleFont(22),
                 color: COLOR.light
+            },
+            backButton: {
+                color: COLOR.light
             }
         },
     })
@@ -81,7 +87,8 @@ export function setDefaultOptions() {
 export function pushToStack(
     currentComponentId: string,
     screenName: Screens,
-    propsToPassed: Object = {}
+    propsToPassed: Object = {},
+    options: Options = {}
 ) {
     Navigation.push(
         currentComponentId,
@@ -89,10 +96,12 @@ export function pushToStack(
             component: {
                 name: SCREENS[screenName],
                 id: SCREENS[screenName],
-                passProps: propsToPassed
-            }
+                passProps: propsToPassed,
+                options: options
+            },
+
         }
-    )
+    );
 };
 
 /**

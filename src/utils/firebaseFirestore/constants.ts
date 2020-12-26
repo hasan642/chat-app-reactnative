@@ -9,5 +9,6 @@
  * The collection names.
  */
 export const COLLECTION = Object.freeze({
-    CHAT_ROOMS: 'CHAT_ROOMS'
+    CHAT_ROOMS: 'CHAT_ROOMS',
+    MESSAGES: 'MESSAGES'
 });

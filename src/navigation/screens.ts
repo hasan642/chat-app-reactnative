@@ -10,9 +10,13 @@ import {
     LoginScreen,
     SignupScreen,
     HomeScreen,
-    AddRoomScreen
+    AddRoomScreen,
+    RoomScreen
 } from 'screens';
-import { withRedux, withSafeArea } from "./providers";
+import {
+    withRedux,
+    withSafeArea
+} from "./providers";
 
 /**
  * constants.
@@ -34,6 +38,7 @@ export const SCREENS = Object.freeze({
     LOGIN_SCRREN: `${prefix}.loginScreen`,
     SIGNUP_SCRREN: `${prefix}.signupScreen`,
     HOME_SCREEN: `${prefix}.homeScreen`,
+    ROOM_SCRREN: `${prefix}.roomScreen`,
     ...modalNames
 });
 
@@ -55,6 +60,7 @@ export function registerScreens() {
 
     Navigation.registerComponent(
         SCREENS.HOME_SCREEN,
+        () => withSafeArea(HomeScreen),
         () => HomeScreen
     );
 
@@ -62,6 +68,12 @@ export function registerScreens() {
         SCREENS.ADD_ROOM,
         () => withSafeArea(AddRoomScreen),
         () => AddRoomScreen
+    );
+
+    Navigation.registerComponent(
+        SCREENS.ROOM_SCRREN,
+        () => withRedux(RoomScreen),
+        () => RoomScreen
     );
 };
 

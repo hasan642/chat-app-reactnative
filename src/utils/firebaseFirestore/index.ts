@@ -8,7 +8,10 @@
 
 import firestore from '@react-native-firebase/firestore';
 import { COLLECTION } from './constants';
-import { ChatRoom } from './types';
+import {
+    ChatRoom,
+    Message
+} from './types';
 
 /**
  * A function that creates new room.
@@ -21,7 +24,7 @@ export async function createRoom(roomName: string) {
          */
         const chatRoomToBeAdded: ChatRoom = {
             name: roomName,
-            creationDate: new Date().getTime()
+            creationTime: new Date().getTime()
         };
 
         /**
@@ -41,8 +44,43 @@ export async function createRoom(roomName: string) {
  */
 export function getChatRooms() {
     try {
-        return firestore().collection(COLLECTION.CHAT_ROOMS)
+        return firestore().collection(COLLECTION.CHAT_ROOMS);
     } catch (error) {
         console.log('error in listenToRoomChanges', error);
+    }
+};
+
+/**
+ * A function helper that adds new message to firestore.
+ */
+export function addNewMessage(
+    m: Message,
+    roomId: string
+) {
+    try {
+        return firestore()
+            .collection(COLLECTION.CHAT_ROOMS)
+            .doc(roomId)
+            .collection(COLLECTION.MESSAGES)
+            .add(m);
+    } catch (error) {
+        console.log('error in addNewMessage', error);
+    }
+};
+
+/**
+ * A function helper that gets room messages.
+ */
+export function getRoomMessages(roomId: string) {
+    try {
+
+        /**
+         * create the path for messages.
+         */
+        const pathToMessages = `${COLLECTION.CHAT_ROOMS}/${roomId}/${COLLECTION.MESSAGES}`;
+        return firestore().collection(pathToMessages);
+
+    } catch (error) {
+        console.log('error is', error);
     }
 };

@@ -1,3 +1,5 @@
+import { IMessage } from "react-native-gifted-chat";
+
 /**
  * types.ts
  * developed by Hasan Alawneh.
@@ -11,11 +13,16 @@
  */
 export interface ChatRoom {
     name: string;
-    creationDate: number;
+    creationTime: number;
 
     /**
      * 'id' will be created automatically with firebase.
      */
     id?: string;
-    
+
 };
+
+/**
+ * The message type.
+ */
+export interface Message extends IMessage { };

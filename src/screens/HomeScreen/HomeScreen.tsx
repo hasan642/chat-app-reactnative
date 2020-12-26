@@ -18,10 +18,13 @@ import {
     Divider,
     List
 } from 'react-native-paper';
-import { toggleModal } from 'navigation';
+import {
+    toggleModal,
+    pushToStack
+} from 'navigation';
 import {
     Options,
-    NavigationComponentProps,
+    NavigationComponentProps
 } from 'react-native-navigation';
 import { translate } from 'i18n';
 import {
@@ -29,6 +32,8 @@ import {
     ChatRoom
 } from 'utils';
 import { FAB } from 'react-native-paper';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { MARGINS } from 'theme';
 
 /**
  * type checking
@@ -40,7 +45,12 @@ interface HomeScreenProps extends NavigationComponentProps {
 /**
  * A function component that shows a HomeScreen.
  */
-function HomeScreen(props: HomeScreenProps) {
+function HomeScreen({ componentId }: HomeScreenProps) {
+
+    /**
+     * get bottom inset from safe area.
+     */
+    const { bottom: bottomInset } = useSafeAreaInsets();
 
     /**
      * state.
@@ -93,12 +103,12 @@ function HomeScreen(props: HomeScreenProps) {
                 {...{} as any}
 
                 title={item.name}
-                description={item.creationDate}
+                description={item.creationTime}
                 titleNumberOfLines={1}
                 titleStyle={styles.listTitle}
                 descriptionStyle={styles.listDescription}
                 descriptionNumberOfLines={1}
-                onPress={handleChatRoomPress}
+                onPress={() => handleChatRoomPress(item)}
             />
         );
     };
@@ -111,8 +121,19 @@ function HomeScreen(props: HomeScreenProps) {
     /**
      * Handles chat room press.
      */
-    const handleChatRoomPress = () => {
-
+    const handleChatRoomPress = (chatRoom: ChatRoom) => {
+        pushToStack(
+            componentId,
+            'ROOM_SCRREN',
+            { roomId: chatRoom.id },
+            {
+                topBar: {
+                    title: {
+                        text: chatRoom.name
+                    }
+                }
+            }
+        );
     };
 
     /**
@@ -138,7 +159,10 @@ function HomeScreen(props: HomeScreenProps) {
 
             {...{} as any}
 
-            style={styles.fab}
+            style={[
+                styles.fab,
+                { bottom: bottomInset + MARGINS.NORMAL }
+            ]}
             small
             icon="plus"
             onPress={handleFabPress}
