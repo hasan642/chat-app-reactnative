@@ -19,7 +19,8 @@ import styles from './styles';
  */
 interface PaperIconProps {
     icon: string;
-    onPress: () => void;
+    
+    onPress?: () => void;
     size?: number;
     style?: ViewStyle;
 };

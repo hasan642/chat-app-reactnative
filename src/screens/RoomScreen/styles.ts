@@ -16,6 +16,17 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLOR.wildSand
   },
+  sendingContainer: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  bottomComponentContainer: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  textAvatarStyle: {
+    color: COLOR.light,
+  }
 });
 
 /**

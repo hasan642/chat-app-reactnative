@@ -20,6 +20,9 @@
         "createRoom": "اضافة غرفة دردشة جديدة",
         "roomName": "اسم الغرفة"
     },
+    "roomsScreen": {
+        "sendPlaceholder": "أكتب رسالتك هنا ..."
+    },
     "validation": {
         "fieldRequired": "الحقل مطلوب",
         "passwordLengthError": "كلمة المرور يجب ان تكون {{length}} على الأقل",

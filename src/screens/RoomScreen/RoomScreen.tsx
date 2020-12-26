@@ -10,16 +10,27 @@ import React, {
     useEffect
 } from 'react';
 import styles from './styles';
-import { GiftedChat } from 'react-native-gifted-chat';
+import {
+    GiftedChat,
+    Send,
+    Avatar
+} from 'react-native-gifted-chat';
 import { NavigationComponentProps } from 'react-native-navigation';
 import {
     Message,
     addNewMessage,
-    getRoomMessages
+    getRoomMessages,
+    updateLatestMessage
 } from 'utils';
 import { View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { userSelector } from 'redux/slices';
+import { translate } from 'i18n';
+import {
+    PaperIcon,
+    ScreenLoader
+} from 'components';
+import { scaleSize } from 'theme';
 
 /**
  * type checking
@@ -54,19 +65,31 @@ function RoomScreen({ roomId }: RoomScreenProps) {
                      * serialize messages to 'Message' type.
                      */
                     const newMessages = docs.map(messageDoc => {
-                        const value = messageDoc.data();
+                        const {
+                            _id,
+                            text,
+                            user,
+                            createdAt
+                        } = messageDoc.data();
 
                         return {
-                            _id: value._id,
-                            text: value.text,
-                            user: value.user,
-                            createdAt: value.createdAt.seconds
+                            _id,
+                            text,
+                            user: {
+                                _id: user._id,
+                                name: user.name
+                            },
+                            createdAt: createdAt.seconds
                         } as Message;
+
                     });
 
+                    /**
+                     * update messages.
+                     */
                     setMessages(GiftedChat.append(messages, newMessages));
 
-                })
+                });
         },
         []
     );
@@ -84,7 +107,24 @@ function RoomScreen({ roomId }: RoomScreenProps) {
         /**
          * add message to firestore.
          */
-        addNewMessage(m[0], roomId);
+        addNewMessage(
+            {
+                ...m[0],
+                createdAt: new Date().getTime()
+            },
+            roomId
+        );
+
+        /**
+         * update the latest message.
+         */
+        updateLatestMessage(
+            roomId,
+            {
+                text: m[0].text,
+                creationTime: new Date().getTime()
+            }
+        );
 
     };
 
@@ -93,9 +133,61 @@ function RoomScreen({ roomId }: RoomScreenProps) {
             <GiftedChat
                 messages={messages}
                 onSend={newMessage => handleSend(newMessage)}
-                user={{ _id: user && user.uid }}
+                user={{
+                    _id: user && user.uid,
+                    name: user && user.email
+                }}
+                placeholder={translate('roomsScreen.sendPlaceholder')}
+                renderSend={renderSend}
+                scrollToBottom
+                scrollToBottomComponent={renderScrollToBottomComponent}
+                renderLoading={ScreenLoader}
+                renderAvatar={renderAvatar}
             />
         </View>
+    );
+};
+
+/**
+ * A function that renderes send button.
+ */
+function renderSend(props: any) {
+    return (
+        <Send {...props}>
+            <View style={styles.sendingContainer}>
+                <PaperIcon
+                    icon='send-circle'
+                    size={scaleSize(28)}
+                />
+            </View>
+        </Send>
+    );
+};
+
+/**
+ * A function that renderes scroll to button.
+ */
+function renderScrollToBottomComponent() {
+    return (
+        <View style={styles.bottomComponentContainer}>
+            <PaperIcon
+                icon='chevron-double-down'
+                size={scaleSize(28)}
+            />
+        </View>
+    );
+};
+
+/**
+ * A function that renderes and sender avatar.
+ */
+const renderAvatar = (props: any) => {
+    return (
+        <Avatar
+            currentMessage
+            {...props}
+            textStyle={styles.textAvatarStyle}
+        />
     );
 };
 

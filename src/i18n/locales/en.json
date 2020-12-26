@@ -20,6 +20,9 @@
         "createRoom": "Create a new chat room",
         "roomName": "Room name"
     },
+    "roomsScreen": {
+        "sendPlaceholder": "Type your message here..."
+    },
     "validation": {
         "fieldRequired": "Field is required",
         "passwordLengthError": "Password should be {{length}} letters at least",

@@ -10,7 +10,8 @@ import firestore from '@react-native-firebase/firestore';
 import { COLLECTION } from './constants';
 import {
     ChatRoom,
-    Message
+    Message,
+    LatestMessage
 } from './types';
 
 /**
@@ -83,4 +84,24 @@ export function getRoomMessages(roomId: string) {
     } catch (error) {
         console.log('error is', error);
     }
+};
+
+/**
+ * A function helper that updates the latest message in room.
+ */
+export async function updateLatestMessage(
+    roomId: string,
+    latestMessage: LatestMessage
+): Promise<void> {
+    try {
+        await firestore()
+            .collection(COLLECTION.CHAT_ROOMS)
+            .doc(roomId)
+            .set(
+                { latestMessage },
+                { merge: true }
+            );
+    } catch (error) {
+        console.log('error in updateLatestMessage', error);
+    };
 };

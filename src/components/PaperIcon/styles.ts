@@ -12,8 +12,14 @@ import { StyleSheet } from 'react-native';
  */
 const styles = StyleSheet.create({
     icon: {
+        marginLeft: 0,
         paddingLeft: 0,
-        marginLeft: 0
+        marginRight: 0,
+        paddingRight: 0,
+        paddingBottom: 0,
+        marginBottom: 0,
+        paddingTop: 0,
+        marginTop: 0
     }
 });
 
