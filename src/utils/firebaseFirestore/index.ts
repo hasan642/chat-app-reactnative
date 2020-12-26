@@ -6,9 +6,12 @@
  * created at: 25/12/2020
  */
 
-import firestore, { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
+import firestore from '@react-native-firebase/firestore';
 import { COLLECTION } from './constants';
-import { ChatRoom, Message } from './types';
+import {
+    ChatRoom,
+    Message
+} from './types';
 
 /**
  * A function that creates new room.
@@ -76,7 +79,7 @@ export function getRoomMessages(roomId: string) {
          */
         const pathToMessages = `${COLLECTION.CHAT_ROOMS}/${roomId}/${COLLECTION.MESSAGES}`;
         return firestore().collection(pathToMessages);
-        
+
     } catch (error) {
         console.log('error is', error);
     }
