@@ -12,6 +12,8 @@ import {
 import { setI18nConfig } from "i18n";
 import { init } from "config";
 import { StorageHelper } from "utils";
+import reduxStore from 'redux/store';
+import { cacheUser } from "redux/slices";
 
 /**
  * Register navigation screens.
@@ -42,9 +44,18 @@ Navigation.events().registerAppLaunchedListener(
         /**
          * set the root app based on user auth status.
          */
-        const isUserLoggedIn = await StorageHelper.get('@User') !== null;
-        if (isUserLoggedIn) {
-            goToAppStack()
+        const user = await StorageHelper.get('@User');
+        if (user) {
+
+            /**
+             * save user to redux.
+             */
+            reduxStore.dispatch(cacheUser(user));
+
+            /**
+             * go to app stack.
+             */
+            goToAppStack();
         } else {
             goToAuthStack();
         };

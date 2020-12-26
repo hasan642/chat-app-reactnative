@@ -10,7 +10,8 @@ import {
   COLOR,
   MARGINS,
   scaleFont,
-  PADDINGS
+  PADDINGS,
+  scaleSize
 } from 'theme';
 
 /**
@@ -25,18 +26,20 @@ const styles = StyleSheet.create({
     marginBottom: MARGINS.NORMAL
   },
   listTitle: {
-    fontSize: scaleFont(22)
+    fontSize: scaleFont(18)
   },
   listDescription: {
-    fontSize: scaleFont(16),
+    fontSize: scaleFont(14),
     paddingTop: PADDINGS.SMALL
   },
   fab: {
     position: 'absolute',
-    margin: 16,
-    right: 0,
-    bottom: 0,
-    backgroundColor:COLOR.royalBlue
+    right: MARGINS.LARGE,
+    backgroundColor: COLOR.royalBlue,
+    height: scaleSize(40),
+    width: scaleSize(40),
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
 

@@ -54,10 +54,8 @@ const userSlice = createSlice({
             state.success = true;
             state.user = user;
         },
-        reset: (state) => {
-            state.loading = false;
-            state.error = null;
-            state.success = false;
+        cacheUser: (state, { payload: user }: PayloadAction<LocalUser>) => {
+            state.user = user;
         },
     },
 });
@@ -69,9 +67,9 @@ const {
     loadUser,
     setError,
     setUser,
-    reset
+    cacheUser
 } = userSlice.actions;
-export { reset };
+export { cacheUser };
 
 /**
  * export all needed from userSlice.
