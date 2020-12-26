@@ -20,9 +20,18 @@ export interface ChatRoom {
      */
     id?: string;
 
+    latestMessage?: LatestMessage;
 };
 
 /**
  * The message type.
  */
 export interface Message extends IMessage { };
+
+/**
+ * The latest message type.
+ */
+export type LatestMessage = {
+    text: string;
+    creationTime: number;
+};

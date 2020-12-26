@@ -34,6 +34,7 @@ import {
 import { FAB } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { MARGINS } from 'theme';
+import { ScreenLoader } from 'components';
 
 /**
  * type checking
@@ -51,6 +52,7 @@ function HomeScreen({ componentId }: HomeScreenProps) {
      * get bottom inset from safe area.
      */
     const { bottom: bottomInset } = useSafeAreaInsets();
+    const [fetchingRooms, setFetchingRooms] = useState<boolean>(true);
 
     /**
      * state.
@@ -68,14 +70,26 @@ function HomeScreen({ componentId }: HomeScreenProps) {
              */
             const unsubscribe = getChatRooms()
                 .onSnapshot(({ docs: roomCollections }) => {
-
+        
                     /**
                      * transform room collection.
                      */
                     const chatRooms: ChatRoom[] = roomCollections.map(docSnapShot => {
+
+                        /**
+                         * grap data from doc.
+                         */
+                        const {
+                            name,
+                            creationTime,
+                            latestMessage
+                        } = docSnapShot.data();
+
                         return {
-                            id: docSnapShot.id,
-                            ...docSnapShot.data() as ChatRoom
+                            name,
+                            creationTime,
+                            latestMessage,
+                            id: docSnapShot.id
                         };
                     });
 
@@ -83,6 +97,12 @@ function HomeScreen({ componentId }: HomeScreenProps) {
                      * update the chat rooms.
                      */
                     setChatRooms(chatRooms);
+
+                    /**
+                     * turn off loader.
+                     */
+                    setFetchingRooms(false);
+
                 });
 
             /**
@@ -97,13 +117,19 @@ function HomeScreen({ componentId }: HomeScreenProps) {
      * Renderes chat room.
      */
     const renderChatRoom = ({ item }: { item: ChatRoom }) => {
+
+        /**
+         * the description of item.
+         */
+        const description = (item.latestMessage && item.latestMessage.text) || ' ';
+
         return (
             <List.Item
 
                 {...{} as any}
 
                 title={item.name}
-                description={item.creationTime}
+                description={description}
                 titleNumberOfLines={1}
                 titleStyle={styles.listTitle}
                 descriptionStyle={styles.listDescription}
@@ -167,6 +193,8 @@ function HomeScreen({ componentId }: HomeScreenProps) {
             icon="plus"
             onPress={handleFabPress}
         />
+
+        {fetchingRooms && <ScreenLoader />}
     </View>);
 };
 
